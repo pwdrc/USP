@@ -8,17 +8,25 @@ void addLivro(Pilha** pilha, Livro* livro) {
     novo->prox = *pilha;
     *pilha = novo;
 }
-
+ 
 // modificar depois para imprimir em arquivo
-void printPilha(Pilha** pilha, int n) {
+void salvaPilha(Pilha** pilha, char* arquivo) {
     Pilha* aux = *pilha;
+    FILE* arq = fopen(arquivo, "w");
+    if(arq == NULL) {
+        printf("erro ao abrir o arquivo\n");
+        return;
+    }
+    int byteOffset = 0;
     while(aux != NULL) {
-        printf("Id: %d:\n", aux->livro->id);
-        printf("Titulo: %s\n", aux->livro->titulo);
-        printf("Autor: %s\n", aux->livro->autor);
-        printf("Byte offset: %d", 200); // posição no arquivo
+        fprintf(arq, "Id: %d:\n", aux->livro->id);
+        fprintf(arq, "Titulo: %s\n", aux->livro->titulo);
+        fprintf(arq, "Autor: %s\n", aux->livro->autor);
+        fprintf(arq, "Byte offset: %d\n", byteOffset); // posição no arquivo
+        byteOffset += sizeof(Livro);
         aux = aux->prox;
     }
+    fclose(arq);
 }
 
 Livro* leLivro() {

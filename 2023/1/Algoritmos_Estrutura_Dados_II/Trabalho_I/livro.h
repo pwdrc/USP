@@ -15,6 +15,6 @@ typedef struct Pilha {
 
 Livro* leLivro(); 
 void addLivro(Pilha** pilha, Livro* livro);
-void printPilha(Pilha** pilha, int n);
+void salvaPilha(Pilha** pilha, char* arquivo);
 
 #endif
