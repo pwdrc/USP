@@ -17,7 +17,16 @@ gerenciador de l_livro para a biblioteca pessoal do seu professor preferido!
 int main() {
 
     Pilha* pilhaDelivros = NULL;
-    addLivro(&pilhaDelivros, &l);
+    // n: número de livros de entrada
+    // m: número de m últimos livros a exibir
+    int n, m;
+    scanf("%d", &n);
+    for(int i = 0; i < n; i++) {
+        Livro* l = leLivro();
+        addLivro(&pilhaDelivros, l);
+    }
+
+    //addLivro(&pilhaDelivros, &l);
     printPilha(&pilhaDelivros, 3);
 
     return 0;
