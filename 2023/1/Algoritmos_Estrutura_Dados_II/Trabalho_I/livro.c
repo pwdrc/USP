@@ -8,3 +8,13 @@ void addLivro(Pilha** pilha, Livro* livro) {
     novo->prox = *pilha;
     *pilha = novo;
 }
+
+void printPilha(Pilha** pilha, int n) {
+    Pilha* aux = *pilha;
+    while(aux != NULL) {
+        printf("Livro: %d:\n", aux->livro->id);
+        printf("Título: %s\n", aux->livro->titulo);
+        printf("Autor: %s\n", aux->livro->autor);
+        aux = aux->prox;
+    }
+}

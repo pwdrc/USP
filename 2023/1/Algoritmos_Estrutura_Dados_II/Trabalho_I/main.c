@@ -10,13 +10,15 @@ l_livro, escrita desses dados em um arquivo (modo bin√°rio) e leitura e impress√
 gerenciador de l_livro para a biblioteca pessoal do seu professor preferido!
 */
 
-#include<stdio.h>
-#include<stdlib.h>
-#include"livro.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include "livro.h"
 
 int main() {
 
     Pilha* pilhaDelivros = NULL;
+    addLivro(&pilhaDelivros, &l);
+    printPilha(&pilhaDelivros, 3);
 
     return 0;
 }

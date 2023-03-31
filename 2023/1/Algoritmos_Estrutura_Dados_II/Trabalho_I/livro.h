@@ -9,9 +9,10 @@ typedef struct Livro {
 
 typedef struct Pilha {
     Livro* livro;
-    Pilha* prox;
-}
+    struct Pilha* prox;
+} Pilha;
 
 void addLivro(Pilha** pilha, Livro* livro);
+void printPilha(Pilha** pilha, int n);
 
 #endif
