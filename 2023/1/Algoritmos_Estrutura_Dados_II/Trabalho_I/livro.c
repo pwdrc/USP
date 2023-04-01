@@ -39,10 +39,10 @@ void salvaLivro(Livro *livro, char *arquivo, int byteOffset) {
         printf("erro ao abrir o arquivo\n");
         return;
     }
-    fprintf(arq, "Id: %d\n", livro->id);
-    fprintf(arq, "Titulo: %s\n", livro->titulo);
-    fprintf(arq, "Autor: %s\n", livro->autor);
-    fprintf(arq, "Byte offset: %d\n", byteOffset); // posição no arquivo
+    fwrite(&(livro->id), sizeof(int), 1, arq);
+    fwrite(&(livro->titulo), sizeof(char), strlen(livro->titulo), arq);
+    fwrite(&(livro->autor), sizeof(char), strlen(livro->autor), arq);
+    fwrite(&byteOffset, sizeof(int), 1, arq); // posição no arquivo
     byteOffset += sizeof(Livro);
     fclose(arq);
 }

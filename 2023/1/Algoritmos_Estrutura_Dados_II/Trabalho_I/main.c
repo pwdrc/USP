@@ -31,9 +31,11 @@ int main() {
     for(int i = 0; i < n; i++) {
         Livro* l = leLivro();
         salvaLivro(l, s, byteOffset);
-        
+
         //addLivro(&pilhaDelivros, l);
     }
+
+    scanf("%d", &m);
 
     //addLivro(&pilhaDelivros, &l);
     //salvaPilha(&pilhaDelivros, s);
