@@ -16,23 +16,27 @@ gerenciador de l_livro para a biblioteca pessoal do seu professor preferido!
 
 int main() {
 
-    Pilha* pilhaDelivros = NULL;
+    //Pilha* pilhaDelivros = NULL;
    
     // n: número de livros de entrada
     // m: número de m últimos livros a exibir
     int n, m;
 
     // s: save.txt: nome do arquivo para salvar os dados
-    char s[9] = "save.txt";
+    char s[9] = "save";
   
+    int byteOffset = 0;
+
     scanf("%d", &n);
     for(int i = 0; i < n; i++) {
         Livro* l = leLivro();
-        addLivro(&pilhaDelivros, l);
+        salvaLivro(l, s, byteOffset);
+        
+        //addLivro(&pilhaDelivros, l);
     }
 
     //addLivro(&pilhaDelivros, &l);
-    salvaPilha(&pilhaDelivros, s);
+    //salvaPilha(&pilhaDelivros, s);
 
     return 0;
 }
