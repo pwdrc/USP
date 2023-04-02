@@ -37,7 +37,12 @@ int main() {
     }
 
     scanf("%d", &m);
-    imprimeLivro(s, m);
+
+    Livro* teste = (Livro*) malloc(sizeof(Livro));
+    teste = leLivroArq(s);
+    imprimeLivro(teste);
+    
+    //imprimeLivro(l);
 
     //addLivro(&pilhaDelivros, &l);
     //salvaPilha(&pilhaDelivros, s);

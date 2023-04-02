@@ -14,7 +14,8 @@ typedef struct Livro {
 //} Pilha;
 
 
-Livro* leLivro(); 
+Livro* leLivro();
+Livro*  leLivroArq(char *arquivo);
 void salvaLivro(Livro *livro, char *arquivo, int byteOffset);
 void imprimeLivro(Livro *livro);
 //void addLivro(Pilha** pilha, Livro* livro);
