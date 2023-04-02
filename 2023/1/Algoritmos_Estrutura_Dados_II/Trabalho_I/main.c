@@ -20,6 +20,7 @@ int main() {
    
     // n: número de livros de entrada
     // m: número de m últimos livros a exibir
+    // m deve ser <= n
     int n, m;
 
     // s: save.txt: nome do arquivo para salvar os dados
@@ -36,6 +37,7 @@ int main() {
     }
 
     scanf("%d", &m);
+    imprimeLivro(s, m);
 
     //addLivro(&pilhaDelivros, &l);
     //salvaPilha(&pilhaDelivros, s);

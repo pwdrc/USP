@@ -39,10 +39,21 @@ void salvaLivro(Livro *livro, char *arquivo, int byteOffset) {
         printf("erro ao abrir o arquivo\n");
         return;
     }
+    
+    // id
     fwrite(&(livro->id), sizeof(int), 1, arq);
+
+    // titulo
     fwrite(&(livro->titulo), sizeof(char), strlen(livro->titulo), arq);
+    fwrite("|", sizeof(char), 1, arq);
+    
+    // autor
     fwrite(&(livro->autor), sizeof(char), strlen(livro->autor), arq);
+    
+    // byteOffset
     fwrite(&byteOffset, sizeof(int), 1, arq); // posição no arquivo
+    fwrite("#", sizeof(char), 1, arq);
+    
     byteOffset += sizeof(Livro);
     fclose(arq);
 }
@@ -53,4 +64,11 @@ Livro* leLivro() {
     scanf(" %[^(\r|\n)]", livro->titulo);
     scanf(" %[^(\r|\n)]", livro->autor);
     return livro;
+}
+
+void imprimeLivro(Livro *livro) {
+    printf("Id: %d:\n", livro->id);
+    printf("Titulo: %s\n", livro->titulo);
+    printf("Autor: %s\n", livro->autor);
+    printf("\n");
 }
