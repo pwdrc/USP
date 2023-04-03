@@ -26,26 +26,21 @@ int main() {
     // s: save.txt: nome do arquivo para salvar os dados
     char s[9] = "save";
   
-    int byteOffset = 0;
-
     scanf("%d", &n);
     for(int i = 0; i < n; i++) {
         Livro* l = leLivro();
-        salvaLivro(l, s, byteOffset);
+        salvaLivro(l, s);
 
         //addLivro(&pilhaDelivros, l);
     }
 
     scanf("%d", &m);
 
-    Livro* teste = (Livro*) malloc(sizeof(Livro));
-    teste = leLivroArq(s);
-    imprimeLivro(teste);
-    
-    //imprimeLivro(l);
-
-    //addLivro(&pilhaDelivros, &l);
-    //salvaPilha(&pilhaDelivros, s);
-
+    // calcular quantas posicas deve pular para ler os m ultimos:
+    int pula = m - n - 1;
+    Livro** lista = lerUltimosLivros(s, pula, m);
+    for(int i = 0; i < m; i++) {
+        imprimeLivro(lista[i]);
+    }
     return 0;
 }

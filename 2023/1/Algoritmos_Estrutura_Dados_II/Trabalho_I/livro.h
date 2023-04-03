@@ -15,9 +15,10 @@ typedef struct Livro {
 
 
 Livro* leLivro();
-Livro*  leLivroArq(char *arquivo);
-void salvaLivro(Livro *livro, char *arquivo, int byteOffset);
+void salvaLivro(Livro *livro, char *arquivo);
 void imprimeLivro(Livro *livro);
+Livro** lerUltimosLivros(char* arquivo, int pula, int m);
+void posicionaNoCaractere(FILE* fp, char caractere);
 //void addLivro(Pilha** pilha, Livro* livro);
 //void salvaPilha(Pilha** pilha, char* arquivo);
 

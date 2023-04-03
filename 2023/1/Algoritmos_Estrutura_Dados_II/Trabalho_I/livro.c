@@ -33,7 +33,7 @@
 //    fclose(arq);
 //}
 
-void salvaLivro(Livro *livro, char *arquivo, int byteOffset) {
+void salvaLivro(Livro *livro, char *arquivo) {
     FILE* arq = fopen(arquivo, "a");
     if(arq == NULL) {
         printf("erro ao abrir o arq\n");
@@ -55,10 +55,10 @@ void salvaLivro(Livro *livro, char *arquivo, int byteOffset) {
     fwrite(&(livro->autor), sizeof(char), strlen(livro->autor), arq);
     
     // byteOffset
-    fwrite(&byteOffset, sizeof(int), 1, arq); // posição no arq
+    //fwrite(&byteOffset, sizeof(int), 1, arq); // posição no arq
     fwrite("#", sizeof(char), 1, arq);
-    
-    byteOffset += sizeof(Livro);
+    //
+    //byteOffset += sizeof(Livro);
     fclose(arq);
 }
 
@@ -77,34 +77,51 @@ void imprimeLivro(Livro *livro) {
     printf("\n");
 }
 
-Livro* leLivroArq(char *arquivo) {
+Livro** lerUltimosLivros(char* arquivo, int pula, int m) {
+    
+    // abrir o arquivo em modo leitura de binário
     FILE* arq = fopen(arquivo, "rb");
-    if (arq == NULL) {
-        printf("Erro ao abrir o arq.\n");
-        return 0;
+
+    // posicionar p ponteiro no arquivo na posicao depois de "pular" todos os "#"
+    for(int i = 0; i < pula; i++) {
+        posicionaNoCaractere(arq, '#');
     }
 
-    Livro* livro = (Livro*) malloc(sizeof(Livro));
-    
-    
-    // ler id
-    fread(&(livro->id), sizeof(int), 1, arq);
-    
-    // ler titulo
-    int i = 0;
-    char c = fgetc(arq);
-    while (c != '|') {
-        livro->titulo[i++] = c;
-        c = fgetc(arq);
+    Livro** l = (Livro**) malloc(sizeof(Livro*) * m);
+    for(int i = 0; i < m; i++) {
+
+        l[i] = (Livro*) malloc(sizeof(Livro));
+
+        fread(&(l[i]->id), sizeof(int), 1, arq);
+        
+        int j = 0;
+        char c = fgetc(arq);
+        while (c != '|') {
+            l[i]->titulo[j++] = c;
+            c = fgetc(arq);
+        }
+        l[i]->titulo[j] = '\0';
+
+        int len_autor;
+        fread(&len_autor, sizeof(int), 1, arq);
+        fgets(l[i]->autor, len_autor + 1, arq);
+        //emover o símbolo de fim de registro
+        l[i]->autor[strlen(l[i]->autor) - 1] = '\0';
     }
-    livro->titulo[i] = '\0';
     
-    // ler autor
-    int len_autor;
-    fread(&len_autor, sizeof(int), 1, arq);
-    fgets(livro->autor, len_autor + 1, arq);
-    // Remover o símbolo de fim de registro
-    livro->autor[strlen(livro->autor)] = '\0';
-    
-    return livro;
+    fclose(arq);
+    return l;
 }
+
+
+void posicionaNoCaractere(FILE* fp, char caractere) {
+    int c;
+    while ((c = fgetc(fp)) != EOF) {
+        if (c == caractere) {
+        // Achou o caractere "#", move o ponteiro para o início da próxima string
+            fseek(fp, 1, SEEK_CUR);
+            break;
+        }
+}
+}
+
