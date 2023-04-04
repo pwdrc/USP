@@ -16,31 +16,34 @@ gerenciador de l_livro para a biblioteca pessoal do seu professor preferido!
 
 int main() {
 
-    //Pilha* pilhaDelivros = NULL;
-   
-    // n: número de livros de entrada
-    // m: número de m últimos livros a exibir
-    // m deve ser <= n
     int n, m;
-
-    // s: save.txt: nome do arquivo para salvar os dados
     char s[9] = "save";
   
     scanf("%d", &n);
     for(int i = 0; i < n; i++) {
-        Livro* l = leLivro();
-        salvaLivro(l, s);
-
-        //addLivro(&pilhaDelivros, l);
+        Livro* livro = (Livro*) malloc(sizeof(Livro));
+        scanf("%d", &livro->id);
+        scanf(" %[^(\r|\n)]", livro->titulo);
+        scanf(" %[^(\r|\n)]", livro->autor);
+        salvaLivro(livro, s);
+        free(livro);
     }
 
     scanf("%d", &m);
 
     // calcular quantas posicas deve pular para ler os m ultimos:
-    int pula = m - n - 1;
-    Livro** lista = lerUltimosLivros(s, pula, m);
-    for(int i = 0; i < m; i++) {
-        imprimeLivro(lista[i]);
+    int pula = n - m;
+    
+    Livro lista[n];
+    lerTodosOsLivros(lista, s, n);
+
+
+    for(int i = pula; i < n; i++) {
+        printf("Id: %d\n", lista[i].id);
+        printf("Titulo: %s\n", lista[i].titulo);
+        printf("Autor: %s\n", lista[i].autor);
+        printf("Byteoffset: %d\n", lista[i].byteOffset);
+        printf("\n");
     }
     return 0;
 }

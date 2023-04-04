@@ -6,20 +6,10 @@ typedef struct Livro {
     int id;
     char titulo[MAX_TAM];
     char autor[MAX_TAM];
+    long int byteOffset;
 } Livro;
 
-//typedef struct Pilha {
-//    Livro* livro;
-//    struct Pilha* prox;
-//} Pilha;
-
-
-Livro* leLivro();
-void salvaLivro(Livro *livro, char *arquivo);
-void imprimeLivro(Livro *livro);
-Livro** lerUltimosLivros(char* arquivo, int pula, int m);
-void posicionaNoCaractere(FILE* fp, char caractere);
-//void addLivro(Pilha** pilha, Livro* livro);
-//void salvaPilha(Pilha** pilha, char* arquivo);
+void salvaLivro(Livro* livro, char *arquivo);
+void lerTodosOsLivros(Livro*lista, char* arquivo, int m);
 
 #endif
