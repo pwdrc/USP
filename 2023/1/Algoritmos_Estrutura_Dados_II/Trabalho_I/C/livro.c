@@ -72,8 +72,6 @@ void lerTodosOsLivros(Livro* lista, char* arquivo, int n) {
         // avançar mais um caractere para ignorar o delimitador "#"
         c = fgetc(arq);
 
-        lista[i].byteOffset = i * (sizeof(int) + strlen(lista[i].titulo) + 1 + sizeof(int) + strlen(lista[i].autor) + 1);
-
         // incrementar o contador de livros
         i++;
     }
