@@ -10,7 +10,8 @@ public class Vilao extends Personagem {
         this.anosDePrisao = pAnosDePrisao;
     }
 
-    public Vilao(String Nome, String nomeVidaReal, ArrayList<String> poderes) {
-        super(Nome, nomeVidaReal, poderes);
+    public Vilao(String Nome, String nomeVidaReal) {
+        super.setNome(Nome);
+        super.setNomeVidaReal(nomeVidaReal);
     }
 }

@@ -1,8 +1,15 @@
+import java.util.ArrayList;
+
 public class Personagem {
     private String nome;
     private String nomeVidaReal;
-    private ArrayList<Superpoder> poderes;
+    private ArrayList<Superpoder> poderes = new ArrayList<>();
     private int vida;
+
+    public void setPoder(String pNome) {
+        Superpoder poder = new Superpoder();
+        this.poderes.add(poder);
+    }
 
     public String getNome() {
         return this.nome;
@@ -34,13 +41,13 @@ public class Personagem {
 
     public void atacar(int intAtaque, String nomePoder, Personagem atacado) {
         
-        if(this.poderes.contains(nomePoder)) {
+       
             
             int chanceDeAcerto = (int) (Math.random() * 100);
             
-            if(chanceDeAcerto > 50 && atacado.vida > 0) {
-                atacado.vida -= intAtaque;
+            if(chanceDeAcerto > 50) {
+                atacado.setVida(atacado.getVida() - intAtaque);
             }
-        }
+        
     }
 }

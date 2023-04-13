@@ -8,7 +8,8 @@ public class SuperHeroi extends Personagem {
         return super.getTotalPoder();
     }
 
-    public SuperHeroi(String Nome, String nomeVidaReal, ArrayList<String> poderes) {
-        super(Nome, nomeVidaReal, poderes);
+    public SuperHeroi(String Nome, String pNomeVidaReal) {
+        super.setNome(Nome);
+        super.setNomeVidaReal(pNomeVidaReal);
     }
 }
